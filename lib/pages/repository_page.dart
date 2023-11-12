@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:github_api_demo/api/github_api.dart';
 import 'package:github_api_demo/models/repository.dart';
 import 'package:github_api_demo/models/user.dart';
+import 'package:github_api_demo/pages/home_page.dart';
 import 'package:github_api_demo/pages/repository_detalhe_page.dart';
-import 'package:github_api_demo/pages/repository_page.dart';
 
 import 'following_page.dart';
 
-class HomePage extends StatefulWidget {
+class RepositoryPage extends StatefulWidget {
   final User user;
-  const HomePage({required this.user});
+  const RepositoryPage({required this.user});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<RepositoryPage> createState() => _RepositoryPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _RepositoryPageState extends State<RepositoryPage> {
   final api = GitHubApi();
   late Future<List<Repository>> _repos;
 
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                             RepositoryPage(user: widget.user)));
               },
             ),
-            ListTile(
+                        ListTile(
               leading: Icon(Icons.star),
               title: Text('Favoritos'),
               onTap: () {
@@ -85,31 +85,11 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      
       body: Container(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              width: 120,
-              height: 120,
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundColor: Colors.transparent,
-                backgroundImage: NetworkImage(widget.user.avatarUrl),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              widget.user.login,
-              style: TextStyle(fontSize: 22),
-            ),
-            SizedBox(height: 50),
-            Text(
-              'Repositorys',
-              style: TextStyle(fontSize: 15),
-            ),
             Expanded(
                 child: FutureBuilder<List<Repository>>(
               future: _repos,
@@ -132,8 +112,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      RepositoryDetalhesPage(repo: repo)));
+                                  builder: (context) => RepositoryDetalhesPage(repo: repo)));
                         },
                       );
                     }),

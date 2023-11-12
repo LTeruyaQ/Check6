@@ -1,4 +1,5 @@
 import 'package:github_api_demo/models/owner.dart';
+import 'package:github_api_demo/models/user.dart';
 
 class Repository {
   final int id;
@@ -10,7 +11,7 @@ class Repository {
   final String language;
   final int stars;
   final int forks;
-  final Owner owner;
+  final User owner;
 
   Repository({
     required this.id,
@@ -33,10 +34,10 @@ class Repository {
       description: json['description'] ?? '',
       isPrivate: json['private'] ?? false,
       htmlUrl: json['html_url'] ?? '',
-      language: json['language'] ?? '',
+      language: json['language'] ?? 'Desconhecido',
       stars: json['stargazers_count'] ?? 0,
       forks: json['forks_count'] ?? 0,
-      owner: Owner.fromJson(json['owner'] ?? {}),
+      owner: User.fromJson(json['owner'] ?? {}),
     );
   }
 }

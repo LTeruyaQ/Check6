@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:github_api_demo/pages/following_page.dart';
+import 'package:github_api_demo/pages/home_page.dart';
 import 'package:github_api_demo/pages/login_page.dart';
 
 void main() {

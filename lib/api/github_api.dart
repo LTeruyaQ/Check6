@@ -9,7 +9,7 @@ import '../models/user.dart';
 class GitHubApi {
   final String baseUrl = 'https://api.github.com/';
   final String token =
-      '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';
+      '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';
 
   Future<User?> findUser(String userName) async {
     final url = '${baseUrl}users/$userName';
@@ -39,9 +39,7 @@ class GitHubApi {
     if (response.statusCode == 200) {
       var jsonList = jsonDecode(response.body);
       var users = jsonList.map<User>((json) => User.fromJson(json)).toList();
-      if (kDebugMode) {
-        print('molhou');
-      }
+      
       return users ?? [];
     } else {
       return [];
@@ -54,13 +52,9 @@ class GitHubApi {
 
     if (response.statusCode == 200) {
       var jsonList = jsonDecode(response.body);
-            if (kDebugMode) {
-        print(response.body);
-      }
+
       var repos = jsonList.map<Repository>((json) => Repository.fromJson(json)).toList();
-      if (kDebugMode) {
-        print('molhou');
-      }
+
       return repos ?? [];
     } else {
       return [];

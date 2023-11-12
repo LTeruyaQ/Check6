@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_api_demo/api/github_api.dart';
+import 'package:github_api_demo/pages/home_page.dart';
+import 'package:github_api_demo/pages/repository_page.dart';
 
 import '../models/user.dart';
 
@@ -27,31 +29,66 @@ class _FollowingPageState extends State<FollowingPage> {
       appBar: AppBar(
         title: const Text("Following"),
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text(widget.user.login),
+              accountEmail: Text(widget.user.htmlUrl),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(widget.user.avatarUrl),
+              ),
+            ),
+                        ListTile(
+              leading: Icon(Icons.house),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            HomePage(user: widget.user)));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('followers'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            FollowingPage(user: widget.user)));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: Text('Repositorios'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            RepositoryPage(user: widget.user)));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.star),
+              title: Text('Favoritos'),
+              onTap: () {
+                // Adicione ação ao tocar em favoritos aqui
+              },
+            ),
+            // Adicione mais itens de menu conforme necessário
+          ],
+        ),
+      ),
+      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: CircleAvatar(
-                    radius: 50.0,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(widget.user.avatarUrl),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  widget.user.login,
-                  style: TextStyle(fontSize: 22),
-                )
-              ],
-            ),
           ),
           const SizedBox(
             height: 20,
