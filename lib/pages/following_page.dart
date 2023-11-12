@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_api_demo/api/github_api.dart';
+import 'package:github_api_demo/pages/fav_repository_page.dart';
 import 'package:github_api_demo/pages/home_page.dart';
 import 'package:github_api_demo/pages/repository_page.dart';
 
@@ -76,7 +77,11 @@ class _FollowingPageState extends State<FollowingPage> {
               leading: Icon(Icons.star),
               title: Text('Favoritos'),
               onTap: () {
-                // Adicione ação ao tocar em favoritos aqui
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            FavRepositoryPage(user: widget.user)));
               },
             ),
             // Adicione mais itens de menu conforme necessário

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:github_api_demo/api/github_api.dart';
 import 'package:github_api_demo/models/repository.dart';
 import 'package:github_api_demo/models/user.dart';
+import 'package:github_api_demo/pages/fav_repository_page.dart';
 import 'package:github_api_demo/pages/home_page.dart';
 import 'package:github_api_demo/pages/repository_detalhe_page.dart';
 
@@ -78,7 +79,11 @@ class _RepositoryPageState extends State<RepositoryPage> {
               leading: Icon(Icons.star),
               title: Text('Favoritos'),
               onTap: () {
-                // Adicione ação ao tocar em favoritos aqui
+                                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            FavRepositoryPage(user: widget.user)));
               },
             ),
             // Adicione mais itens de menu conforme necessário
@@ -112,7 +117,7 @@ class _RepositoryPageState extends State<RepositoryPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RepositoryDetalhesPage(repo: repo)));
+                                  builder: (context) => RepositoryDetalhesPage(repo: repo, user: widget.user)));
                         },
                       );
                     }),

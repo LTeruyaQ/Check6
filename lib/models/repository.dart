@@ -1,4 +1,3 @@
-import 'package:github_api_demo/models/owner.dart';
 import 'package:github_api_demo/models/user.dart';
 
 class Repository {

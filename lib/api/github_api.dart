@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
+import 'package:github_api_demo/models/branch.dart';
 import 'package:github_api_demo/models/repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,7 +8,7 @@ import '../models/user.dart';
 class GitHubApi {
   final String baseUrl = 'https://api.github.com/';
   final String token =
-      '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';
+      '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';
 
   Future<User?> findUser(String userName) async {
     final url = '${baseUrl}users/$userName';
@@ -56,6 +55,35 @@ class GitHubApi {
       var repos = jsonList.map<Repository>((json) => Repository.fromJson(json)).toList();
 
       return repos ?? [];
+    } else {
+      return [];
+    }
+  }
+
+    Future<List<Repository>> getFavs(String userName) async {
+    final url = '${baseUrl}users/$userName/starred';
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonList = jsonDecode(response.body);
+
+      var repos = jsonList.map<Repository>((json) => Repository.fromJson(json)).toList();
+
+      return repos ?? [];
+    } else {
+      return [];
+    }
+  }
+
+    Future<List<Branch>> getBranches(String userName, String repoName) async {
+    final url = '${baseUrl}repos/$userName/$repoName/branches';
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonList = jsonDecode(response.body);
+
+      var branch = jsonList.map<Branch>((json) => Branch.fromJson(json)).toList();
+      return branch ?? [];
     } else {
       return [];
     }
